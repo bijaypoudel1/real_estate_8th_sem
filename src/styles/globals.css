@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media print {
+  .print-component {
+    display: block;
+  }
+}
+
+@media print {
+  .print-kitchen {
+    display: block;
+  }
+}
