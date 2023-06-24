@@ -1,15 +1,13 @@
-"use client";
-
 import { useRouter } from "next/router";
 import { Popover } from "@headlessui/react";
 import Cookies from "js-cookie";
 import Link from "next/link";
+import logo from "../../assets/images/logo.png";
+import Image from "next/image";
 
 const Appbar = () => {
   const router = useRouter();
   const token = Cookies.get("access_token") ?? false;
-  console.log(Boolean(token));
-  const a = token;
 
   const handleLogout = async () => {
     Cookies.remove("access_token");
@@ -18,14 +16,10 @@ const Appbar = () => {
   };
 
   return (
-    <nav className="bg-white border-gray-200">
+    <nav className="bg-white shadow-md border-gray-200">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center">
-          <img
-            src="https://flowbite.com/docs/images/logo.svg"
-            className="h-8 mr-3"
-            alt="Flowbite Logo"
-          />
+          <Image src={logo} className=" h-16 w-16 mr-3" alt="Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">
             Real Estate
           </span>
