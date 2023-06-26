@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import ReactSimplyCarousel from "react-simply-carousel";
-import banner from ".././../../assets/images/banner.jpg";
+import banner from "../../assets/images/banner.jpg";
 
 function ReactSimplyCarouselExample() {
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);

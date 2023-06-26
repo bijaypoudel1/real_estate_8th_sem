@@ -5,7 +5,7 @@ import eyeOpenIcon from "../../assets/icons/eye-open.svg";
 import eyeCloseIcon from "../../assets/icons/eye-close.svg";
 import { useState } from "react";
 import { useLoginQuery } from "@/queries/authQuery";
-import CircularLoading from "@/components/common/circularLoding";
+import CircularLoading from "@/components/circularLoding";
 
 type PageWithLayout = NextPage & {
   getLayout?: (page: JSX.Element) => JSX.Element;
