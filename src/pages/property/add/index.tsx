@@ -1,8 +1,54 @@
-import { RadioGroup } from "@headlessui/react";
+import CustomRadio from "@/components/forms/radio";
 import { useState } from "react";
+import MapboxMap from "@/components/map";
+import ImageUploader from "@/components/imageuploader";
+import { useRouter } from "next/router";
+import { SucessToast } from "@/components/common/toast";
 
 const AddProperty = () => {
-  let [plan, setPlan] = useState("");
+  const router = useRouter();
+  const [type, setType] = useState("");
+  const [category, setCategory] = useState("");
+  const [heightLight, setHeightLight] = useState("");
+  const [propertylocation, setLocation] = useState("");
+  const [area, setArea] = useState("");
+  const [roadType, setRoadType] = useState("");
+  const [priceOnCall, setPriceOnCall] = useState<any>(false);
+  const locationOptions = [
+    { value: "koshi", label: "Koshi" },
+    { value: "madesh", label: "Madhesh" },
+    { value: "Bagmati", label: "Bagmati" },
+    { value: "Gandaki", label: "Gandaki" },
+    { value: "Lumbini", label: "Lumbini" },
+    { value: "Sudurpaschim", label: "Sudurpaschim" },
+    { value: "Karnali", label: "Karnali" },
+  ];
+  const roadOptions = [
+    { value: "paved", label: "paved" },
+    { value: "blacked topped", label: "blacked topped" },
+    { value: "alley", label: "alley" },
+    { value: "dhalan", label: "dhalan" },
+    { value: "graveled", label: "graveled" },
+    { value: "soil", label: "soil" },
+  ];
+
+  const heightLightOptions = [
+    { value: "koshi", label: "south" },
+    { value: "madesh", label: "north" },
+    { value: "Bagmati", label: "east" },
+    { value: "Gandaki", label: "west" },
+    { value: "Lumbini", label: "south-east" },
+    { value: "Sudurpaschim", label: "south-west" },
+    { value: "Karnali", label: "north-east" },
+    { value: "Karnali", label: "north-west" },
+  ];
+
+  const categoryOptions = [
+    { value: "house", label: "House" },
+    { value: "land", label: "Land" },
+    { value: "flats", label: "Flats" },
+    { value: "appartment", label: "appartment" },
+  ];
 
   return (
     <div className="min-h-[50vh]">
@@ -81,44 +127,226 @@ const AddProperty = () => {
             Add Property
           </h1>
           <div className="h-0.5 w-full bg-gray-200"></div>
+          {/* property overview */}
           <div className="mt-6">
             <p className="text-blue-400">Property Overview</p>
+            {/* type */}
             <div className="mt-3">
-              <p className="text-sm text-gray-400">FOR</p>
+              <p className="text-sm text-gray-900">FOR</p>
               <div className="cursor-pointer mt-3 w-fit">
-                <RadioGroup
-                  value={plan}
-                  className="flex uppercase text-sm"
-                  onChange={setPlan}
-                >
-                  <RadioGroup.Option value="startup">
-                    {({ checked }) => (
-                      <div
-                        className={
-                          checked
-                            ? "my-[5px] mr-4 flex h-[32px] cursor-pointer items-center justify-between rounded-[16px] bg-blue-400 text-white px-[12px] py-0"
-                            : "my-[5px] mr-4 flex h-[32px] cursor-pointer items-center justify-between rounded-[16px] bg-gray-200 px-[12px] py-0 "
-                        }
-                      >
-                        Rent
-                      </div>
-                    )}
-                  </RadioGroup.Option>
-                  <RadioGroup.Option value="business">
-                    {({ checked }) => (
-                      <div
-                        className={
-                          checked
-                            ? "my-[5px] mr-4 flex h-[32px] cursor-pointer items-center justify-between rounded-[16px] bg-blue-400 text-white px-[12px] py-0 text-[15px]"
-                            : "my-[5px] mr-4 flex h-[32px] cursor-pointer items-center justify-between rounded-[16px] bg-gray-200 px-[12px] py-0 text-[15px]"
-                        }
-                      >
-                        Sell
-                      </div>
-                    )}
-                  </RadioGroup.Option>
-                </RadioGroup>
+                <CustomRadio
+                  value={type}
+                  setValue={setType}
+                  radioOptions={[
+                    { value: "rent", label: "rent" },
+                    { value: "sell", label: "Sell" },
+                  ]}
+                />
               </div>
+            </div>
+            {/* category */}
+            <div className="mt-3">
+              <p className="text-sm text-gray-900">PROPERTY CATEGORY</p>
+              <div className="cursor-pointer mt-3 w-fit">
+                <CustomRadio
+                  value={category}
+                  setValue={setCategory}
+                  radioOptions={categoryOptions}
+                />
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-5">
+            {/* land type */}
+            <div className="mt-3">
+              <p className="project_label__DEjnY">Land Type*</p>
+              <select className="undefined">
+                <option selected disabled value="">
+                  Select a Land Type
+                </option>
+                <option value="Agricultural">Agricultural</option>
+                <option value="Commercial">Commercial</option>
+                <option value="Others">Others</option>
+              </select>
+            </div>
+            {/* location */}
+            <div className="mt-3">
+              <p className="text-sm text-gray-900">PROPERTY LOCATION</p>
+              <div className="cursor-pointer mt-3 w-fit">
+                <CustomRadio
+                  value={propertylocation}
+                  setValue={setLocation}
+                  radioOptions={locationOptions}
+                />
+              </div>
+            </div>
+            {/* district and muncipility */}
+            <div className="flex gap-10 items-center">
+              <div className="mt-3">
+                <p className="project_label__DEjnY">DISTRICT</p>
+                <select>
+                  <option disabled selected value="">
+                    Select a district
+                  </option>
+                  <option value="Mechi">Mechi</option>
+                  <option value="Biratnagar">Biratnagar</option>
+                  <option value="Taplejung">Taplejung</option>
+                  <option value="Dhankuta">Dhankuta</option>
+                  <option value="Bhojpur">Bhojpur</option>
+                  <option value="Hanumannagar">Hanumannagar</option>
+                  <option value="Sagarmatha">Sagarmatha</option>
+                  <option value="Janakpur">Janakpur</option>
+                  <option value="Dolakha">Dolakha</option>
+                  <option value="Chautara">Chautara</option>
+                  <option value="Kathmandu">Kathmandu</option>
+                  <option value="Bara">Bara</option>
+                  <option value="Trishuli">Trishuli</option>
+                  <option value="Rapti">Rapti</option>
+                  <option value="Gorkha">Gorkha</option>
+                  <option value="Pokhara">Pokhara</option>
+                  <option value="Syangja">Syangja</option>
+                  <option value="Lumbini">Lumbini</option>
+                  <option value="Baglung">Baglung</option>
+                  <option value="Gulmi">Gulmi</option>
+                  <option value="Kapilavastu">Kapilavastu</option>
+                  <option value="Pyuthan">Pyuthan</option>
+                  <option value="Humla">Humla</option>
+                  <option value="Karnali">Karnali</option>
+                  <option value="Jajarkot">Jajarkot</option>
+                  <option value="Salyan">Salyan</option>
+                  <option value="Dailekh">Dailekh</option>
+                  <option value="Nepalganj">Nepalganj</option>
+                  <option value="Bajhang">Bajhang</option>
+                  <option value="Doti">Doti</option>
+                  <option value="Dhangadhi">Dhangadhi</option>
+                  <option value="Mahakali">Mahakali</option>
+                </select>
+              </div>
+              <div className="mt-3">
+                <p className="project_label__DEjnY">MUNCIPILITY</p>
+                <select>
+                  <option disabled selected value="">
+                    Select a muncipility
+                  </option>
+                  <option value="Bhadrapur">Bhadrapur Municipality</option>
+                  <option value="Mechinagar">Mechinagar Municipality</option>
+                  <option value="Kankai">Kankai Municipality</option>
+                  <option value="Damak">Damak Municipality</option>
+                  <option value="Arjundhara">Arjundhara Municipality</option>
+                </select>
+              </div>
+            </div>
+            {/* heightlight */}
+            <div className="mt-3">
+              <p className="text-sm text-gray-900">PROPERTY HEIGHTLIGHT</p>
+              <div className="cursor-pointer mt-3 w-fit">
+                <CustomRadio
+                  value={heightLight}
+                  setValue={setHeightLight}
+                  radioOptions={heightLightOptions}
+                />
+              </div>
+            </div>
+            {/* area */}
+            <div className="mt-3">
+              <p className="text-sm text-gray-900">PROPERTY AREA</p>
+              <div className="cursor-pointer mt-3 w-fit">
+                <CustomRadio
+                  value={area}
+                  setValue={setArea}
+                  radioOptions={[
+                    { value: "hill", label: "hill" },
+                    { value: "terai", label: "terai" },
+                    { value: "mountain", label: "mountain" },
+                  ]}
+                />
+              </div>
+            </div>
+
+            {/* total area */}
+            <div className="">
+              <p>Area</p>
+              <div className="flex gap-10">
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="number"
+                    className="border-b w-32 mt-1 border-b-gray-900 outline-none"
+                  />
+                  <p>BIGHA</p>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="number"
+                    className="border-b w-32 mt-1 border-b-gray-900 outline-none"
+                  />
+                  <p>KATHA</p>
+                </div>
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="number"
+                    className="border-b w-32 mt-1 border-b-gray-900 outline-none"
+                  />
+                  <p>DHUR</p>
+                </div>
+              </div>
+            </div>
+
+            {/* location select */}
+            <div className="h-[70vh]">
+              <MapboxMap />
+            </div>
+            {/* raod type */}
+            <div className="mt-3">
+              <p className="text-sm text-gray-900">ROAD TYPE</p>
+              <div className="cursor-pointer mt-3 w-fit">
+                <CustomRadio
+                  value={roadType}
+                  setValue={setRoadType}
+                  radioOptions={roadOptions}
+                />
+              </div>
+            </div>
+            {/* image */}
+            <ImageUploader />
+            {/* payment */}
+            <div className="">
+              <p className="text-sm mb-2 text-gray-900">PAYMENT STRUCTURE</p>
+              <label className="">Price on call</label>
+              <input
+                value={priceOnCall}
+                onChange={(e) => setPriceOnCall(e.target.checked)}
+                type="checkbox"
+                className="h-5 ml-3 w-5"
+              />
+            </div>
+            {/* price */}
+            {!priceOnCall && (
+              <div className="">
+                <p>Price</p>
+                <input
+                  type="number"
+                  className="border-b w-44 mt-1 border-b-gray-900 outline-none"
+                />
+              </div>
+            )}
+            {/* title */}
+            <div className="">
+              <p>Title</p>
+              <input
+                type="text"
+                className="border-b w-full mt-1 border-b-gray-900 outline-none"
+              />
+            </div>
+            <div className="mt-4">
+              <button
+                onClick={() => {
+                  router.push("/");
+                  SucessToast("Property Added Sucessfully");
+                }}
+                className="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+              >
+                ADD PROPERTY
+              </button>
             </div>
           </div>
         </div>

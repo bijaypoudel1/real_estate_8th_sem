@@ -1,4 +1,4 @@
-import ReactSimplyCarouselExample from "@/components/common/carousel";
+import ReactSimplyCarouselExample from "@/components/carousel";
 import home from "../../assets/icons/house.png";
 import land from "../../assets/icons/land.webp";
 import flat from "../../assets/icons/flat.png";
