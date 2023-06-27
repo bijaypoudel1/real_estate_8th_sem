@@ -5,7 +5,7 @@ const CustomRadio = ({ value, setValue, radioOptions }: any) => {
     <div>
       <RadioGroup
         value={value}
-        className="flex uppercase text-sm"
+        className="flex flex-wrap uppercase text-sm"
         onChange={setValue}
       >
         {radioOptions?.map((item: any, i: number) => {

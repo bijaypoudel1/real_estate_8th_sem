@@ -8,8 +8,10 @@ import house from "../../assets/images/hosue.jpeg";
 import royal from "../../assets/images/royal.webp";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Home = () => {
+  const router = useRouter();
   return (
     <>
       <div className="">
@@ -20,35 +22,50 @@ const Home = () => {
             <h1 className="text-2xl font-semibold">Popular Categories</h1>
           </div>
           <div className="grid md:grid-cols-3 grid-cols-1 lg:grid-cols-5 gap-10 mt-5 ">
-            <div className="bg-white cursor-pointer hover:bg-blue-100 transition-all ease-in-out duration-200 p-5 rounded-2xl">
+            <div
+              onClick={() => router.push("/filter")}
+              className="bg-white cursor-pointer hover:bg-blue-100 transition-all ease-in-out duration-200 p-5 rounded-2xl"
+            >
               <div className="flex flex-col justify-center items-center gap-1">
                 <Image className="h-32 w-32" src={home} alt="home" />
                 <p className="text-xl font-semibold">House</p>
                 <p className="text-lg text-light">12</p>
               </div>
             </div>
-            <div className="bg-white cursor-pointer hover:bg-blue-100 transition-all ease-in-out duration-200 p-5 rounded-2xl">
+            <div
+              onClick={() => router.push("/filter")}
+              className="bg-white cursor-pointer hover:bg-blue-100 transition-all ease-in-out duration-200 p-5 rounded-2xl"
+            >
               <div className="flex flex-col justify-center items-center gap-1">
                 <Image className="h-32 w-32" src={land} alt="home" />
                 <p className="text-xl font-semibold">Land</p>
                 <p className="text-lg text-light">12</p>
               </div>
             </div>{" "}
-            <div className="bg-white cursor-pointer hover:bg-blue-100 transition-all ease-in-out duration-200 p-5 rounded-2xl">
+            <div
+              onClick={() => router.push("/filter")}
+              className="bg-white cursor-pointer hover:bg-blue-100 transition-all ease-in-out duration-200 p-5 rounded-2xl"
+            >
               <div className="flex flex-col justify-center items-center gap-1">
                 <Image className="h-32 w-32" src={flat} alt="home" />
                 <p className="text-xl font-semibold">Flats</p>
                 <p className="text-lg text-light">12</p>
               </div>
             </div>{" "}
-            <div className="bg-white cursor-pointer hover:bg-blue-100 transition-all ease-in-out duration-200 p-5 rounded-2xl">
+            <div
+              onClick={() => router.push("/filter")}
+              className="bg-white cursor-pointer hover:bg-blue-100 transition-all ease-in-out duration-200 p-5 rounded-2xl"
+            >
               <div className="flex flex-col justify-center items-center gap-1">
                 <Image className="h-32 w-32" src={appartment} alt="home" />
                 <p className="text-xl font-semibold">Appartments</p>
                 <p className="text-lg text-light">12</p>
               </div>
             </div>
-            <div className="bg-white cursor-pointer hover:bg-blue-100 transition-all ease-in-out duration-200 p-5 rounded-2xl">
+            <div
+              onClick={() => router.push("/filter")}
+              className="bg-white cursor-pointer hover:bg-blue-100 transition-all ease-in-out duration-200 p-5 rounded-2xl"
+            >
               <div className="flex flex-col justify-center items-center gap-1">
                 <Image className="h-32 w-32   " src={shop} alt="home" />
                 <p className="text-xl font-semibold">Shop</p>
@@ -64,7 +81,10 @@ const Home = () => {
             {/* item */}
             {[1, 2, 3, 4].map((item, id) => {
               return (
-                <div className="max-w-sm cursor-pointer bg-white border border-gray-200 rounded-2xl overflow-hidden shadow  ">
+                <div
+                  onClick={() => router.push("/filter")}
+                  className="max-w-sm cursor-pointer bg-white border border-gray-200 rounded-2xl overflow-hidden shadow  "
+                >
                   <Image src={house} alt="home" />
                   <div className="p-5 flex flex-col gap-2">
                     <p className="text-blue-300">House</p>
